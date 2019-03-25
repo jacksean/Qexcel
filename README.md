@@ -13,6 +13,7 @@
   Transformers(变形金刚) 注：不规则带合并单元格矩阵
   
 3.简单使用
+
   3.1 定义模板
       
       @SingleLine(
@@ -24,6 +25,7 @@
             }
         )
         public static class SingleLineTplClass{}
+        
    3.2 使用模板
    
       ExcelAdapter wa = ExcelHelper.writeBuilder().version(ExcelVersion.XLSX).build();
@@ -33,8 +35,8 @@
       wa.writeToWorkBook(AnnoTemplateEngine.build(SingleLineTplClass.class),params, "第一页",0, javaObj);
       wa.flushTo("D://SingleLine.xlsx");
       
-3.详细使用
+4.详细使用
   更多使用：com.qexcel.test.ExampleTest
   
-4.联系
+5.联系
   email: qexcel@163.com
