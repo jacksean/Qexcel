@@ -31,6 +31,7 @@
       wa.createSheet("第一页");
       //从第1行开始根据模板写入数据
       wa.writeToWorkBook(AnnoTemplateEngine.build(SingleLineTplClass.class),params, "第一页",0, javaObj);
+      wa.flushTo("D://SingleLine.xlsx");
       
 3.详细使用
   更多使用：com.qexcel.test.ExampleTest
