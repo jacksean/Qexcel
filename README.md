@@ -37,5 +37,4 @@
   更多使用：com.qexcel.test.ExampleTest
   
 4.联系
-  email:36144865@qq.com
-  wx:sl_black
+  email: qexcel@163.com
