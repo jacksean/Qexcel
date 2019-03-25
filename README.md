@@ -38,7 +38,7 @@
       wa.flushTo("D://SingleLine.xlsx");
       
 4.详细使用
-  更多使用：com.qexcel.test.ExampleTest
+  更多使用：https://github.com/jacksean/Qexcel/blob/master/src/test/java/com/qexcel/test/ExampleTest.java
   
 5.联系
   email: qexcel@163.com
