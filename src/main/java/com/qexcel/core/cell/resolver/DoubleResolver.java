@@ -16,7 +16,7 @@ public class DoubleResolver implements TypeResolver<Double>{
     
     public static final DoubleResolver INSTANCE = new DoubleResolver();
     
-    public static final String DEFAULT_NUMBER_FORMAT = "#.00";
+    public static final String DEFAULT_NUMBER_FORMAT = "0.00";
 
     public static Double convert(CellAdapter<?> adapter,String format) {
         return INSTANCE.read(adapter, format);

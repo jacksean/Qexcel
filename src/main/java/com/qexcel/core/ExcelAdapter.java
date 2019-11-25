@@ -29,7 +29,7 @@ import com.qexcel.core.template.TemplateEngine;
 
 /**
  * 类ExcelAdapter.java的实现描述：工作簿装饰器
- * 
+ *
  * @author sean 2018年10月31日 上午9:24:38
  */
 public class ExcelAdapter {
@@ -38,22 +38,23 @@ public class ExcelAdapter {
      * 缓存style xls设置又限制,不能超过4000个
      */
     private Map<String, CellStyle> cacheStyle = new HashMap<>();
-    private Map<String, Font>      cacheFont  = new HashMap<>();
+    private Map<String, Font> cacheFont = new HashMap<>();
 
-    private final Workbook         wb;
-    
+    private final Workbook wb;
+
+
     private final FormulaEvaluator evaluator;
-    
+
     private PropertyInterceptor propertyInterceptor;
-    
+
     public ExcelAdapter(Workbook wb) {
         this.wb = wb;
         this.evaluator = wb.getCreationHelper().createFormulaEvaluator();
     }
-    
+
     /**
      * 获取sheet装饰器
-     * 
+     *
      * @param sheetIndex sheet索引 从0开始
      * @return
      */
@@ -71,7 +72,7 @@ public class ExcelAdapter {
 
     /**
      * 获取sheet装饰器
-     * 
+     *
      * @param sheetName sheet名称
      * @return
      */
@@ -82,7 +83,7 @@ public class ExcelAdapter {
 
     /**
      * 创建sheet
-     * 
+     *
      * @param sheetname sheet名称
      * @return
      */
@@ -101,7 +102,7 @@ public class ExcelAdapter {
         RowAdapter row = getRow(sheetIndex, rowIndex);
         return row.createCell(columIndex, cellDataType);
     }
-    
+
     public <R> List<R> readJavaObjList(TemplateEngine tplEngine, String sheetName, int rowStartIndex,
                                        Class<R> javaObjClz) {
         return readJavaObjList(tplEngine, sheetName, rowStartIndex, -1, javaObjClz);
@@ -111,13 +112,13 @@ public class ExcelAdapter {
                                        Class<R> javaObjClz) {
         return getSheet(sheetName).readJavaObjList(tplEngine, rowStartIndex, rowEndIndex, javaObjClz);
     }
-    
-    public <R> void readJavaObjList(TemplateEngine tplEngine, String sheetName,int rowStartIndex, Class<R> objClz, int batchSize,
+
+    public <R> void readJavaObjList(TemplateEngine tplEngine, String sheetName, int rowStartIndex, Class<R> objClz, int batchSize,
                                     Consumer<List<R>> sink) {
         readJavaObjList(tplEngine, sheetName, rowStartIndex, -1, objClz, batchSize, sink);
     }
-    
-    public <R> void readJavaObjList(TemplateEngine tplEngine, String sheetName,int rowStartIndex, int rowEndIndex, Class<R> objClz, int batchSize,
+
+    public <R> void readJavaObjList(TemplateEngine tplEngine, String sheetName, int rowStartIndex, int rowEndIndex, Class<R> objClz, int batchSize,
                                     Consumer<List<R>> sink) {
         getSheet(sheetName).readJavaObjList(tplEngine, rowStartIndex, objClz, batchSize, sink);
     }
@@ -157,18 +158,18 @@ public class ExcelAdapter {
     }
 
     public void writeToWorkBook(TemplateEngine tplEngine, int sheetIndex, int initStatus,
-                                BiPredicate<Integer,Consumer<List>> appender) {
+                                BiPredicate<Integer, Consumer<List>> appender) {
         this.writeToWorkBook(tplEngine, null, sheetIndex, initStatus, appender);
     }
 
     public void writeToWorkBook(TemplateEngine tplEngine, Map<String, Object> variables, int sheetIndex, int initStatus,
-                                BiPredicate<Integer,Consumer<List>> appender) {
+                                BiPredicate<Integer, Consumer<List>> appender) {
         getSheet(sheetIndex).writeToWorkBook(tplEngine, variables, initStatus, appender);
     }
 
     /**
      * 输出到流
-     * 
+     *
      * @param os
      * @throws IOException
      */
@@ -178,7 +179,7 @@ public class ExcelAdapter {
 
     /**
      * 输出到文件
-     * 
+     *
      * @param file
      * @throws IOException
      */
@@ -224,23 +225,23 @@ public class ExcelAdapter {
     public FormulaEvaluator getEvaluator() {
         return evaluator;
     }
-    
+
     public void setPropertyInterceptor(PropertyInterceptor propertyInterceptor) {
         this.propertyInterceptor = propertyInterceptor;
     }
-    
+
     public PropertyInterceptor getPropertyInterceptor() {
         return propertyInterceptor;
     }
 
-    public static interface PropertyInterceptor{
-        default Object getPropertyValue(Object obj,Field f) throws IllegalArgumentException, IllegalAccessException  {
+    public static interface PropertyInterceptor {
+        default Object getPropertyValue(Object obj, Field f) throws IllegalArgumentException, IllegalAccessException {
             return f.get(obj);
         }
-        
-        default void setPropertyValue(Object obj,Field f,Object val) throws IllegalArgumentException, IllegalAccessException {
-            if(val != null)
-                f.set(obj,val);
+
+        default void setPropertyValue(Object obj, Field f, Object val) throws IllegalArgumentException, IllegalAccessException {
+            if (val != null)
+                f.set(obj, val);
         }
     }
 }

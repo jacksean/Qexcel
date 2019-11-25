@@ -16,7 +16,7 @@ public class FloatResolver implements TypeResolver<Float>{
 
     public static final FloatResolver INSTANCE = new FloatResolver();
     
-    public static final String DEFAULT_NUMBER_FORMAT = "#.00";
+    public static final String DEFAULT_NUMBER_FORMAT = "0.00";
     
     public static Float convert(CellAdapter<?> adapter,String format) {
         return INSTANCE.read(adapter, format);

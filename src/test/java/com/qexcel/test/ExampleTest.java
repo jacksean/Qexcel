@@ -246,7 +246,7 @@ public class ExampleTest {
                     .createCell(CellDataType.NUMBER, 10000);
         //创建第3行
         sra.createRow().createCell(CellDataType.STRING, "浮点数字单元格")
-            .createFormatCell(CellDataType.NUMBER, 10000.1234567,"#.000");
+            .createFormatCell(CellDataType.NUMBER, 10000.1234567,"0.000");
         //创建第4行
         sra.createRow().createCell(CellDataType.STRING, "java8时间单元格:")
                     .createCell(CellDataType.DATE, LocalDateTime.now());
