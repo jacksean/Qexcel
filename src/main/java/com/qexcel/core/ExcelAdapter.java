@@ -1,5 +1,6 @@
 package com.qexcel.core;
 
+import java.io.Closeable;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -26,13 +27,14 @@ import com.qexcel.core.enums.CellDataType;
 import com.qexcel.core.enums.HorizontalAlign;
 import com.qexcel.core.enums.VerticalAlign;
 import com.qexcel.core.template.TemplateEngine;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 
 /**
  * 类ExcelAdapter.java的实现描述：工作簿装饰器
  *
  * @author sean 2018年10月31日 上午9:24:38
  */
-public class ExcelAdapter {
+public class ExcelAdapter implements Closeable {
 
     /**
      * 缓存style xls设置又限制,不能超过4000个
@@ -175,6 +177,7 @@ public class ExcelAdapter {
      */
     public void flushTo(OutputStream os) throws IOException {
         wb.write(os);
+        close();
     }
 
     /**
@@ -191,6 +194,14 @@ public class ExcelAdapter {
 
     public Workbook getWb() {
         return wb;
+    }
+
+    @Override
+    public void close() throws IOException {
+        if(wb instanceof SXSSFWorkbook) {
+            ((SXSSFWorkbook) wb).dispose();
+        }
+        wb.close();
     }
 
     public CellStyle createCellStyle(CellStyleAdapter meta) {
